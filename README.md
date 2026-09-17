@@ -1,6 +1,11 @@
-# 🎬 AI漫剧工坊 — 从零创造你的第一部AI动漫短剧
+# 🎬 AI漫剧工坊 — 从零创造你的第一部 AI 动漫短剧
 
-> **一句话说清楚**：这是一个"AI导演助手"——你跟它聊天，它帮你把脑海里的故事，一步一步变成能在抖音/B站发布的动漫短视频。**不需要手绘、不需要学软件、零基础就能上手。**
+> **一句话说清楚**：这是一个"AI 副导演"。你跟它聊天，它帮你把脑海里的故事，一步一步变成能在抖音/B站/小红书发布的动漫短视频。**不需要手绘、不需要学软件，零基础就能上手。**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![中文](https://img.shields.io/badge/语言-中文-red)](SKILL.md)
+[![English](https://img.shields.io/badge/Lang-English-blue)](en/README.md)
+[![Validation](https://github.com/liuxiao20051106-prog/ai-manga-drama/actions/workflows/validate.yml/badge.svg)](../../actions/workflows/validate.yml)
 
 ---
 
@@ -11,12 +16,14 @@
 - [我没有基础，真的能用吗？](#我没有基础真的能用吗)
 - [你需要准备什么？](#你需要准备什么)
 - [快速开始：5分钟体验](#快速开始5分钟体验)
-- [完整制作流程（8步出片）](#完整制作流程8步出片)
+- [八步出片](#八步出片)
 - [三条工具路线怎么选？](#三条工具路线怎么选)
-- [要花多少钱？](#要花多少钱)
+- [要花多少钱？怎么算？](#要花多少钱怎么算)
 - [安装方法](#安装方法)
+- [自带脚本](#自带脚本)
 - [项目文件说明](#项目文件说明)
 - [常见问题 FAQ](#常见问题-faq)
+- [维护与验证](#维护与验证)
 - [参考项目](#参考项目)
 - [许可](#许可)
 
@@ -24,57 +31,56 @@
 
 ## 什么是"AI漫剧"？
 
-**AI漫剧 = AI 生成的动态漫画短视频**
+**AI 漫剧 = AI 生成的动态漫画短视频**
 
 你刷抖音/快手/B站时可能见过这类内容：
 
-> 一段30秒到2分钟的动漫风格短视频，有角色、有对话、有剧情、有BGM，画面虽然是静态漫画风但会有微小的动态效果（风吹发丝、镜头推拉、光影变化），看起来像"动起来的漫画"。
+> 一段 30 秒到 3 分钟的动漫风格短视频，有角色、有对话、有剧情、有 BGM，画面是漫画风但带微小动态（风吹发丝、镜头推拉、光影变化），看起来像"动起来的漫画"。
 
-下面是一个典型例子（A路线制作，30秒治愈风格）：
+一个 30 秒单集的样子：
 
-```
+```text
 画面1（4秒）→ 老旧公寓门口，黄昏光线，镜头缓慢下移
 画面2（3秒）→ 少女从门内走出，微风吹动裙摆
 画面3（3秒）→ 她侧头看向墙上的信箱，眼神期待
 画面4（4秒）→ 信箱特写——空的，只贴着一张褪色贴纸
 画面5（4秒）→ 手指轻划过信箱边框（配音："已经第四十七天了"）
 画面6（5秒）→ 她走出大门，夕阳把背影拉得很长
-画面7（5秒）→ 镜头推近信箱——门缝里隐约有白色信封一角（悬念钩子）
-                                                          → 下集预告
+画面7（5秒）→ 镜头推近信箱——门缝里隐约有白色信封一角（钩子）
 ```
 
-这就是一个完整的漫剧单集。制作它不需要画一笔画——所有画面由 AI 工具生成。
+制作它不需要画一笔画——所有画面由 AI 工具生成，你负责判断和选择。
 
 ---
 
 ## 这个项目能帮你做什么？
 
-把你自己想象成一个"导演"，而本 Skill 就是你的"副导演"。你告诉它你想拍什么故事，它帮你做好一切准备工作：
+把自己想象成"导演"，本 Skill 是你的"副导演"：
 
 | 它帮你做的事 | 你只需要做的事 |
 |-------------|--------------|
-| ✍️ 把一句话创意扩展成完整剧本 | 告诉它你想拍什么类型的故事 |
-| 🎭 设计角色外貌（发型、服装、配饰等） | 告诉它你喜欢什么样的角色 |
-| 🎬 规划分镜（每个镜头怎么拍） | 确认或提出修改意见 |
-| 📝 写出精确的 AI 提示词 | **复制提示词 → 粘贴到 AI 工具 → 下载生成的图片/视频** |
-| 🎙️ 写好配音脚本和 BGM 方案 | 用配音工具生成音频 |
-| ✂️ 给出剪辑合成步骤 | 在剪映里按步骤拼接导出 |
+| 把一句话创意扩展成结构化剧本，并给出单集任务卡 | 告诉它你想拍什么类型的故事 |
+| 设计角色外貌与造型编号，建立**参考图库**（防变脸的地基） | 确认角色方向，挑出满意的那张图 |
+| 定义画风六维度、色板与时段色温，写成"风格锚" | 确认画风 |
+| 规划分镜（景别/机位/动作接点/连续性出入口） | 确认或提出修改意见 |
+| 写出精确的图生图、图生视频、配音提示词 | **复制提示词 → 粘贴到工具 → 下载结果** |
+| 标注台词时长、口型档位、混音层级与字幕规范 | 用配音工具生成音频 |
+| 给出剪辑合成步骤与多平台交付规格 | 在剪映里按步骤拼接导出 |
+| 用脚本给分镜表、提示词、预算做机械体检 | 看体检结果决定改哪里 |
 
-> 💡 **核心原理**：不是 AI 直接帮你做好漫剧，而是 AI 帮你做好所有"脑力劳动"（写剧本、想分镜、写提示词），你把"体力劳动"（复制粘贴、点生成按钮）做完，一部漫剧就出来了。
+> 💡 **核心原理**：不是 AI 替你做完漫剧，而是 AI 承担"脑力劳动"（剧本、分镜、提示词、检查），你完成"体力劳动"（复制粘贴、点生成、挑片子），一部漫剧就出来了。
 
 ---
 
 ## 我没有基础，真的能用吗？
 
-**真的能。** 本项目的设计出发点是：假设你对 AI 工具一无所知。
-
-具体来说，在制作过程中你会学到：
+**真的能。** 本项目假设你对 AI 工具一无所知。
 
 | 你会用到的东西 | 难不难 | 说明 |
 |--------------|--------|------|
-| **和 Claude 对话** | 跟聊天一样 | 用中文说"我想做一个关于XX的漫剧"就行 |
-| **复制粘贴提示词** | 0 难度 | Claude 写好提示词，你 Ctrl+C / Ctrl+V |
-| **在即梦/可灵里点"生成"** | 点一下按钮 | AI 绘图工具，全是中文界面 |
+| **和 AI 对话** | 跟聊天一样 | 说"我想做一个关于 XX 的漫剧"就行 |
+| **复制粘贴提示词** | 0 难度 | AI 写好，你 Ctrl+C / Ctrl+V |
+| **在图像/视频工具里点"生成"** | 点一下按钮 | 多数有中文界面 |
 | **在剪映里拼接片段** | 拖拖拽拽 | 跟拼乐高差不多 |
 
 **你不需要**：编程、画图、做动画、写脚本、懂摄影、学 PR/AE/Blender。
@@ -83,243 +89,107 @@
 
 ## 你需要准备什么？
 
-### 最低配置（¥0，全部免费）
+### 最低配置
 
 | 需要 | 是什么 | 哪里获取 |
 |------|--------|---------|
-| **Claude Code** | 运行本 Skill 的环境 | [claude.ai/code](https://claude.ai/code) 下载 |
-| **一个 AI 绘图账号** | 即梦 或 可灵（推荐） | dreamina.jianying.com / klingai.kuaishou.com |
-| **剪映** | 免费剪辑软件 | jianying.com 下载桌面版 |
+| **运行环境** | 支持 Skills 的 AI 客户端（如 Claude Code / Codex） | 见[安装方法](#安装方法) |
+| **一个图像生成账号** | 中文工具为主，零门槛起步 | 入口见[工具目录](references/tools-catalog.md) |
+| **一个视频生成账号** | 图生视频 | 同上 |
+| **免费剪辑软件** | 剪映专业版（或 DaVinci Resolve） | 官网下载 |
 | **网络** | 能上网就行 | — |
 
-> 🎉 就这些！全部免费。你甚至可以用手机端即梦/剪映完成全流程。
+### 进阶配置
 
-### 进阶配置（画质更好，需付费）
+追求更高画质与角色稳定性时，通常需要升级图像、视频或配音环节的工具。**具体价格、额度与可用性随时变化，请以各工具官方页面为准**（本项目不承诺任何价格或免费额度）。
 
-| 需要 | 费用 | 为什么值得 |
-|------|------|----------|
-| **Midjourney 订阅** | $10-30/月 | 动漫风格画质天花板 |
-| **Runway / Veo3 订阅** | $15-100/月 | 视频动态效果更好 |
-| **ElevenLabs 订阅** | $5/月 | 配音更逼真自然 |
+> ⚠️ 注意：免费额度、模型名称、地区可用性和商用条款都会变。任何长期计划都应在开工前重新核对官方页面。
 
 ---
 
 ## 快速开始：5分钟体验
 
-安装完本 Skill 后，打开 Claude Code，输入：
+安装完后，在客户端里输入：
 
-```
+```text
 帮我做一部漫剧
 ```
 
-然后 Claude 会问你几个问题（就像下面这样）：
+它会先问你几个问题（不会一上来就生成一整季）：
 
-```
-Claude：你好！想做什么类型的故事？
+```text
+AI：想做什么类型的故事？
 你：甜宠的，女主暗恋男主那种
 
-Claude：好的。单集想做多长？
-你：先来个30秒试试
+AI：好的。单集想做多长、发哪个平台？
+你：先来个 30 秒试试，抖音
 
-Claude：工具路线我推荐A路线（国产免费），适合快速出片。可以吗？
+AI：工具路线我推荐 A 路线（中文零门槛，先跑通）。可以吗？
 你：可以
 
-Claude：好，那我们来构思剧本。你的女主角是什么样的人？
+AI：好。你的女主角是什么样的人？
 你：大学生，内向但善良，喜欢在图书馆角落看书
-
-Claude：明白了。我给你写一个一句话梗概……[开始帮你构建故事]
 ```
 
-然后它就一步步引导你完成全流程。**第一集从头到尾大约 2-3 小时**（大部分时间花在 AI 工具生成和等待上）。跑通第一集后，第二集就能压缩到 1 小时左右。
+然后它会一步步带你走完：任务卡 → 角色与风格锚 → 分镜 → 关键帧 → 动态片段 → 配音字幕 → 合成 → 终检。
+
+**建议第一集只做 15–30 秒**，把流程跑通。跑通后每集速度会明显提升——因为锚点（角色、场景、风格）只需要建一次。
 
 ---
 
-## 完整制作流程（8步出片）
+## 八步出片
 
-### 第 0 步：项目初始化
+每一步都有对应的深度指南，遇到具体问题时再打开。
 
-决定三件事：
-- 故事类型（言情 / 悬疑 / 热血 / 治愈 / 搞笑 / 古风 / 科幻？）
-- 单集时长（抖音 15-30 秒 / 标准 30-90 秒 / B站 1-2 分钟？）
-- 用哪条工具路线（新手选 A 路线）
+| 步骤 | 做什么 | 产出 | 深度指南 |
+|------|--------|------|----------|
+| **0 项目初始化** | 定类型、时长、平台、画幅、预算量级与权利边界 | 项目总览 | [成本与排期](references/production-cost-and-schedule.md)、[交付规格](references/platform-specs-and-delivery.md) |
+| **1 剧本与任务卡** | 一句话梗概 → 单集任务卡 → 可拍摄剧本 | 任务卡 + 剧本 | [短格式叙事](references/craft-short-form-narrative.md) |
+| **2 角色/场景/声音** | 身份锚点、造型编号、参考图库、风格锚、色板 | 角色 Bible + 风格指南 | [角色一致性](references/character-consistency.md)、[视觉风格锚](references/craft-visual-style.md) |
+| **3 分镜** | 逐镜拆解（景别/机位/动作/连续性出入口） | 分镜表 | [镜头语言与分镜](references/craft-shot-language.md) |
+| **4 关键帧出图** | 固定身份块 + 固定风格块 + 镜头变量 | 已批准关键帧 | [提示词模板](references/prompt-templates.md) |
+| **5 动态化** | 选动态档位 → 图生视频 → 首尾帧衔接 | 镜头片段 | [动态化技法](references/craft-motion-design.md) |
+| **6 配音与声音** | 台词表、口型档位、音乐音效、字幕 | 音频 + 字幕 | [台词、配音与声音](references/craft-dialogue-voice-and-sound.md) |
+| **7 合成与验收** | 剪辑合成、质量评分、发布包 | 候选成片 | [质量评测](references/quality-evaluation-and-tests.md)、[发布终检](templates/release-checklist.md) |
 
-Claude 会帮你创建项目追踪文件，记录后续所有进度。
-
-### 第 1 步：剧本工坊 ✍️
-
-Claude 和你一起创作剧本：
-1. 确认核心冲突——"主角想要什么？什么在阻碍ta？"
-2. 写一句话梗概——整部剧的"北极星"
-3. 扩展成完整剧本——含场景描述、角色对话、情绪标注
-4. 结尾埋"钩子"——让观众想看下一集
-
-输出格式是结构化的分场景剧本，不是小说——每一段都很短、很画面感。
-
-### 第 2 步：角色与场景设计 🎭
-
-这是最关键的环节——**角色长什么样，全剧都不能变**。
-
-Claude 会帮你：
-1. 写角色详细档案（发型、脸型、眼睛、服装、标志性配饰……）
-2. 写出精确的"人设卡提示词"
-3. 你拿提示词去即梦/可灵/Midjourney 生成第一张角色图
-4. 选出最满意的一张作为"参考图"，锁定角色形象
-5. 选择角色一致性策略（参考图法 / LoRA / 种子固定等）
-
-同时为剧本中出现的每个场景（教室、街道、公寓等）写场景图提示词。
-
-### 第 3 步：分镜脚本 🎬
-
-把剧本转化为可拍摄的分镜表。每个分镜包含：
-
-```
-镜号 S01 → 全景，教室黄昏逆光
-镜号 S02 → 近景，女主特写，若有所思
-镜号 S03 → 中景，女主站起来，走到窗边
-...
-```
-
-每个镜头标注：画面描述、景别（特写/近景/中景/全景）、运镜方式、台词、时长。
-
-1 分钟 ≈ 5-8 个分镜。
-
-### 第 4 步：分镜图生成 🖼️
-
-Claude 为每一个分镜写出完整的**文生图提示词**。你拿着这些提示词去 AI 绘画工具生成图片。
-
-每条提示词都包含了：角色特征 + 场景 + 动作 + 景别 + 光线 + 画风。
-
-### 第 5 步：动画生成 🎥
-
-把第 4 步生成的分镜图，变成动态视频片段。
-
-Claude 为每个分镜写**图生视频提示词**，描述画面中什么要动、怎么动、镜头怎么运。你可以用可灵/即梦/Runway/Vidu 等工具生成。
-
-单片段控制在 4-15 秒。
-
-### 第 6 步：配音与配乐 🎙️
-
-Claude 输出配音脚本（每句台词标好角色、情绪、语速）和 BGM 方案。
-
-你分别用 TTS 工具（剪映/海螺/ElevenLabs）生成配音，用 Suno/Mureka/剪映音效库生成配乐。
-
-### 第 7 步：合成与发布 ✂️
-
-Claude 给出剪辑步骤清单：
-
-1. 剪映导入所有视频片段
-2. 按分镜顺序排列、掐头去尾
-3. 添加配音、BGM、音效
-4. 自动字幕、校对口型
-5. 调色、导出（1080P、30fps、MP4）
-
-以及各平台发布规格（抖音竖屏 9:16 / B站横屏 16:9 / 小红书 3:4）。
+> 每步的输入、输出、验收标准和"需要你决定什么"，都写在 [SKILL.md](SKILL.md) 里。
 
 ---
 
 ## 三条工具路线怎么选？
 
-### 🅰️ A路线：国产零门槛（推荐新手）
+| 路线 | 适合谁 | 优势 | 代价 |
+|------|--------|------|------|
+| **A 易用云端** | 零基础、快速验证 | 中文界面、上手快、不必装显卡 | 画质与一致性受工具限制；额度/隐私/商用条款随服务变化 |
+| **B 高质量云端** | 有预算、追求画质 | 模型选择多、角色一致性手段多 | 成本更高；地区可用性与条款需逐项核对 |
+| **C 本地可控** | 有显卡、重视隐私与批量 | 数据不出本地、可批量可脚本化 | 部署维护成本、模型许可、硬件投入 |
+| **混合路线** | 在质量/成本/隐私间平衡 | 按环节挑最合适的工具 | 必须管理色彩、分辨率与资产交接 |
 
-```
-剧本: DeepSeek（完全免费）
-角色/图片: 即梦 或 可灵（每日免费积分）
-动画: 可灵 或 Vidu（每日免费积分）
-配音: 剪映AI配音（免费）
-音乐: 剪映音效库 + Mureka（免费）
-剪辑: 剪映专业版（免费）
-```
+**推荐路径**：先用 A 路线跑通第一集验证故事 → 故事成立后，再逐个环节升级到 B/C。
 
-- ✅ 全部中文界面，不做英语党
-- ✅ 全部有免费额度，一毛不花
-- ✅ 手机就能操作大部分环节
-- ⚠️ 画质不如 B 路线
-- ⚠️ 免费额度每日有限额
-
-### 🅱️ B路线：国际高品质（追求质量）
-
-```
-剧本: Claude 或 ChatGPT
-角色/图片: Midjourney（动漫风格王者）
-动画: Veo3 / Sora2 / Runway Gen-3
-配音: ElevenLabs（最逼真AI语音）
-音乐: Suno V4
-剪辑: DaVinci Resolve（免费专业级）
-```
-
-- ✅ 画质天花板
-- ✅ 角色一致性最好
-- ✅ 生成速度快
-- ⚠️ 需要英文写提示词（Claude会帮你写）
-- ⚠️ 月费约 $30-50
-- ⚠️ 部分工具需要梯子
-
-### 🅲️ C路线：技术开源（完全可控）
-
-```
-剧本: Ollama + Qwen（本地大模型）
-图片: ComfyUI + Stable Diffusion（本地无限出图）
-LoRA: Kohya_ss（训练专属角色模型）
-动画: AnimateDiff + ComfyUI
-配音: GPT-SoVITS（中文语音克隆）
-音乐: MusicGen（Meta开源）
-剪辑: FFmpeg + MoviePy（Python自动化）
-```
-
-- ✅ 完全免费（除硬件）
-- ✅ 无限使用，无限出图
-- ✅ 可以训练自己的角色模型
-- ✅ 可以写脚本全自动批量生产
-- ⚠️ 需要一块好显卡（推荐 RTX 4060 12GB+）
-- ⚠️ 需要花时间学 ComfyUI
-- ⚠️ 硬件一次性投入 ¥8000-15000
-
-> 💡 **推荐路径**：先用 A 路线（免费）跑通第一集验证故事 → 故事验证通过后，逐步替换为 B/C 路线工具升级画质。
+选工具别只看单价，看六个能力维度（参考输入、首尾帧控制、单次时长与多镜、原生音频与口型、画幅、命中率）——见[工具目录](references/tools-catalog.md)。
 
 ---
 
-## 要花多少钱？
+## 要花多少钱？怎么算？
 
-### 方案一：一毛不花（A路线全免费）
+**本项目不列具体价格**——价格、免费额度、模型名称每几周就会变，写死在文档里只会误导人。
 
-```
-DeepSeek      ¥0    — 完全免费
-即梦           ¥0    — 每天60积分，做一集够用
-可灵           ¥0    — 每天66积分，做一集够用
-剪映           ¥0    — 完全免费
-────────────────────
-合计           ¥0
+真正该算的是这个：
+
+```text
+每支可用成片成本 =（生成额度 + 订阅 + 硬件电费 + 人工工时 + 授权费）÷ 可用成片数
 ```
 
-### 方案二：品质入门（A+B 混合，最低月费）
+关键在**分母**：把失败的尝试也算进去。一个镜头生成 4 次只留 1 次，那 4 次的钱都摊到那 1 次上。
 
-```
-Midjourney    ¥72/月  ($10 Basic计划)
-可灵           ¥0     — 用免费额度
-剪映           ¥0     — 免费
-────────────────────
-合计          ¥72/月
+仓库自带估算脚本，先看量级再决定投多少钱：
+
+```bash
+python scripts/budget_estimate.py --shots 40 --seconds 5 --attempts 2.5 --unit-cost 0.6 --target-seconds 180
 ```
 
-### 方案三：专业创作者（B路线全套）
-
-```
-Midjourney    ¥215/月 ($30 Standard)
-Runway        ¥108/月 ($15 Basic)
-ElevenLabs    ¥36/月  ($5 Starter)
-Suno          ¥72/月  ($10 Pro)
-────────────────────
-合计          ¥431/月 (~$60)
-```
-
-### 方案四：一次投入永久用（C路线）
-
-```
-硬件（RTX 4060 整机）  ¥8000
-软件                    ¥0
-────────────────────────
-合计                    ¥8000（一次性）+ 电费
-```
+它会给出每支可用成片成本，以及"尝试次数 → 成本"的敏感性表，帮你判断**该花钱买更好的工具，还是接受更多重试**。方法详见[成本、产能与排期](references/production-cost-and-schedule.md)。
 
 ---
 
@@ -327,134 +197,17 @@ Suno          ¥72/月  ($10 Pro)
 
 ### 前置条件
 
-你的电脑上装有 **Claude Code**。可以在这里下载：
-- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code/overview)
-- [VS Code 扩展](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)
+装有支持 Skills 的 AI 客户端（Claude Code、Codex 等）。
 
-### 步骤一：下载本 Skill
+### 方式一：克隆到 Skills 目录
+
+Claude Code：
 
 ```bash
-# 克隆到 Claude Code skills 目录
 git clone https://github.com/liuxiao20051106-prog/ai-manga-drama.git ~/.claude/skills/ai-manga-drama
 ```
 
-或者直接下载 ZIP 解压到 `~/.claude/skills/ai-manga-drama/`。
-
-### 步骤二：验证安装
-
-打开 Claude Code，输入：
-
-```
-帮我做一部漫剧
-```
-
-如果 Claude 回复类似"你好！我是AI漫剧工坊……"，说明安装成功。
-
-> **不需要任何额外配置**。Claude Code 会自动发现并加载 skills 目录下的 Skill 文件。
-
----
-
-## 项目文件说明
-
-```
-ai-manga-drama/
-│
-├── SKILL.md                          ← 🎯 主文件，Claude读取的"导演手册"
-│                                        含8个制作阶段的完整指导
-│
-├── README.md                         ← 📖 你正在读的文件
-│
-└── references/                       ← 📚 参考资料库
-    │
-    ├── tools-catalog.md              ← 🔧 全工具速查表
-    │   每个工具列了：免费额度、价格、上手难度、推荐指数
-    │
-    ├── prompt-templates.md           ← 📝 提示词模板库
-    │   含：剧本模板、角色提示词、分镜提示词、
-    │        图生视频提示词、配音标注、BGM提示词
-    │   覆盖中/英/Stable Diffusion三种格式
-    │
-    ├── character-consistency.md      ← 🎭 角色一致性技术详解
-    │   7种方案从易到难排列：参考图法→LoRA→IP-Adapter
-    │   每种方案附操作步骤和适用场景
-    │
-    └── workflow-examples.md          ← 📖 完整工作流示例
-        三个完整实例：
-          示例1 - A路线 30秒治愈日常漫剧《等一封信》
-          示例2 - B路线 60秒悬疑漫剧《换命游戏》
-          示例3 - C路线 ComfyUI自动化管线
-```
-
----
-
-## 常见问题 FAQ
-
-### Q1：我真的完全不会画画，也能做吗？
-
-**能。** 画画的部分由 AI 绘画工具（即梦/Midjourney/Stable Diffusion）完成。你只需要输入文字描述（"一个黑发少女，穿白衬衫，站在教室窗前"），AI 会帮你生成画面。而文字描述也不需要你自己想——Claude 会帮你写好。
-
-### Q2：做一集要多久？
-
-| 熟练度 | A路线 | B路线 | C路线(自动化后) |
-|--------|-------|-------|----------------|
-| 第一集 | 2-3小时 | 2-3小时 | 4-6小时（含搭建） |
-| 跑通后每集 | 1-1.5小时 | 1小时 | 20-30分钟 |
-
-### Q3：角色总是"变脸"怎么办？
-
-这是 AI 漫剧最大的技术挑战，本 Skill 收录了 7 种解决方案。新手最简单的方法：**生成一张满意的角色图 → 后续每个分镜都用这张图作为"参考图"生成**。详见 `references/character-consistency.md`。
-
-### Q4：我能用做出来的漫剧赚钱吗？
-
-可以，但注意：
-- ✅ 平台分成（抖音漫剧付费、B站创作激励）
-- ✅ 定制漫剧接单
-- ⚠️ 确认所用 AI 工具的商用条款（部分工具免费版不可商用）
-- ⚠️ 剧本必须是原创或已获得授权
-
-### Q5：可以用手机完成吗？
-
-A 路线基本可以：DeepSeek（手机App）、即梦（手机App）、可灵（手机App）、剪映（手机App）。但用电脑操作效率更高。
-
-### Q6：除了中文，能做其他语言的漫剧吗？
-
-可以。剧本和配音环节切换语言即可。ElevenLabs 支持 29 种语言的 TTS。
-
-### Q7：这个 Skill 和直接问 Claude "帮我做漫剧"有什么区别？
-
-没有这个 Skill，Claude 也会帮你——但它不知道专业的漫剧制作流程，可能跳过关键步骤（如角色一致性设计、分镜规范、配音情绪标注等），导致你做出来的成品不专业。
-
-这个 Skill 等于给 Claude 加载了一套"漫剧导演专业培训"，让它用业界标准流程引导你。
-
----
-
-## 参考项目
-
-以下开源项目为本 Skill 提供了思路参考：
-
-- [UllrAI/CineGen-ShortDrama](https://github.com/UllrAI/CineGen-ShortDrama) — 开源 AI 导演系统，漫剧/动漫/短剧生成
-- [AniME (SIGGRAPH Asia 2025)](https://dl.acm.org/doi/10.1145/3757374.3771455) — B站多 Agent 动画生成论文（7 Agent架构）
-- [BigBanana-AI-Director](https://github.com/shuyu-labs/BigBanana-AI-Director) — 工业级项目-季-集生产管线
-- [Yutarop/comic-generator](https://github.com/Yutarop/comic-generator) — 一句话 → 完整漫画（MIT开源）
-- [Ran-Chou/moyin-creator](https://github.com/Ran-Chou/moyin-creator) — 魔因漫创，6层身份锚定系统
-
----
-
-## 许可
-
-MIT License — 随意使用、修改、分发。附上原作者署名即可。
-
----
-
-## 2026-08-21 增量补充：Codex、双语工作流与安全生产
-
-> 本节是在原版新手指南之后追加的新版能力说明。前文的教程、示例和表达方式全部保留；其中涉及的模型名称、价格、免费额度、硬件价格、生成速度和平台政策属于历史示例，不应视为长期保证。实际制作前请从[官方工具入口](references/tools-catalog.md)重新核对。
-
-### Codex 支持
-
-本 Skill 现在同时支持 **Codex** 与 **Claude Code**。Codex 安装方式：
-
-macOS / Linux：
+Codex：
 
 ```bash
 git clone https://github.com/liuxiao20051106-prog/ai-manga-drama.git ~/.codex/skills/ai-manga-drama
@@ -463,93 +216,185 @@ git clone https://github.com/liuxiao20051106-prog/ai-manga-drama.git ~/.codex/sk
 Windows PowerShell：
 
 ```powershell
-git clone https://github.com/liuxiao20051106-prog/ai-manga-drama.git "$env:USERPROFILE\.codex\skills\ai-manga-drama"
+git clone https://github.com/liuxiao20051106-prog/ai-manga-drama.git "$env:USERPROFILE\.claude\skills\ai-manga-drama"
 ```
 
-安装完成后，可以直接输入：
+### 方式二：作为系统提示词
 
-```text
-帮我做一部 45 秒竖屏治愈漫剧，先完成第一集任务卡和角色方向。
-```
+1. 打开 [SKILL.md](SKILL.md)，去掉开头的 `---` front matter 块；
+2. 把正文粘贴到平台的"系统提示词 / 自定义指令"；
+3. 开始对话。需要专项内容时，把 `references/` 下对应文件一并附上。
 
-如果目标目录已经存在，不要直接覆盖。先检查本地是否有未提交修改：
+### 方式三：下载 ZIP
+
+下载后解压到对应 skills 目录，目录名保持 `ai-manga-drama`。
+
+### 目标目录已存在时
+
+不要直接覆盖。先检查有没有本地修改：
 
 ```powershell
-git -C "$env:USERPROFILE\.codex\skills\ai-manga-drama" status --short
-git -C "$env:USERPROFILE\.codex\skills\ai-manga-drama" pull --ff-only
+git -C "$env:USERPROFILE\.claude\skills\ai-manga-drama" status --short
+git -C "$env:USERPROFILE\.claude\skills\ai-manga-drama" pull --ff-only
 ```
 
-当第一条命令显示本地修改时，应先备份或合并；不要强制拉取、重置或删除目录。
+有本地修改时先备份或合并；不要强制拉取、重置或删除目录。
 
-### English Skill
+### 英文入口
 
-- [English core Skill](en/SKILL.md)
-- [English references](en/references/)
-- [English project templates](en/templates/)
+英文版使用独立名称 `ai-manga-drama-en`，与中文入口 `ai-manga-drama` 不冲突：[en/SKILL.md](en/SKILL.md)
 
-英文入口使用独立名称 `ai-manga-drama-en`，与中文入口 `ai-manga-drama` 不冲突。
+---
 
-### 新增生产能力
+## 自带脚本
 
-| 能力 | 说明 | 入口 |
-|------|------|------|
-| 项目与连续性 | 管理角色、造型、道具、场景、声音、时间线和镜头入口/出口 | [项目与连续性](references/project-and-continuity.md) |
-| 角色稳定 | 使用身份锚点、参考资产、版本和差异审查，不承诺虚假成功率 | [角色一致性](references/character-consistency.md) |
-| 提示词设计 | 使用模型无关结构，再按当前工具补充参数 | [提示词模板](references/prompt-templates.md) |
-| 权利与安全 | 检查版权、真人肖像、声音克隆、未成年人、隐私和 AI 标识 | [权利与安全](references/rights-safety-and-platforms.md) |
-| 可控自动化 | 使用任务 ID、幂等重试、次数/预算上限和人工闸门 | [自动化流程](references/automation-workflow.md) |
-| 商业化复盘 | 规划受众、指标、实验、合同和单位成片成本，不保证收入 | [商业化与分析](references/commercialization-and-analytics.md) |
-| 质量验收 | 对故事、画面、声音、连续性、权利和可复现性进行证据式评分 | [质量评测](references/quality-evaluation-and-tests.md) |
-| 完整案例 | 提供新项目、连续性修复、自动化和发布准备示例 | [工作流示例](references/workflow-examples.md) |
+四个零依赖 Python 脚本（仅用标准库），可直接在终端运行：
 
-### 9 套可直接复制的项目模板
+```bash
+# 1. 分镜表体检：镜号格式、必填字段、单镜时长上限、总时长偏差、入/出镜连续性、景别单调
+python scripts/shotlist_lint.py 分镜表.md --target-seconds 60
 
-- [项目总表](templates/manga-project.md)
-- [单集任务卡](templates/episode-brief.md)
-- [角色 Bible](templates/character-bible.md)
-- [分镜表](templates/shot-list.md)
-- [素材台账](templates/asset-ledger.md)
-- [权利同意记录](templates/rights-consent-log.md)
-- [生产运行日志](templates/production-run-log.md)
-- [质量评分卡](templates/quality-scorecard.md)
-- [发布检查表](templates/release-checklist.md)
+# 2. 提示词拼装与机械检查：固定身份块/风格块/镜头变量/负面约束
+#    并检出两类高频错误——要求复刻在世创作者、在镜头变量里重复描述外貌
+python scripts/prompt_blocks.py --style-guide 风格指南.md --identity 身份.txt \
+  --action "伸手触碰信箱" --shot-size 中景 --camera "缓慢推近" --negative 多手
 
-### 安全与发布前检查
+# 3. 预算与产能：每支可用成片成本 + 尝试次数敏感性表
+python scripts/budget_estimate.py --shots 40 --seconds 5 --attempts 2.5 --unit-cost 0.6
 
-1. **素材权利**：确认剧本、角色、图片、视频、音乐、字体、商标和参考素材的来源及商用范围。
-2. **真人与声音**：真人肖像和声音克隆必须获得与用途匹配的授权；不要冒充名人、客户或陌生人。
-3. **未成年人**：涉及可识别未成年人时，采用更严格的监护同意、隐私和数据最小化要求。
-4. **创作风格**：不要要求复刻在世创作者或特定作品的可识别表达，改用构图、色彩、材质、光线等高层特征。
-5. **敏感输入**：不要把密钥、身份证件、未公开合同或无关私人数据写入提示词、日志和公开仓库。
-6. **AI 标识**：发布当日重新核对目标地区和平台的显式/隐式标识规则，不删除服务写入的必要标识或元数据。
-7. **人工批准**：质量通过不等于自动获得上传、签约或公开发布权限；最终版本和外部发布必须单独确认。
-8. **费用与版本**：免费额度、价格、模型名称、API 和地区可用性随时可能变化；先做最小样片，再根据真实失败率和单位成片成本升级。
+# 4. 仓库自检：front matter、链接、双语镜像、英文目录中文残留、未完成标记、脚本语法、可达性
+python scripts/validate.py --warnings-as-errors
 
-本项目提供创作和制作风险检查框架，不替代针对具体地区、合同或发布场景的法律意见。
+# 脚本自身的单元测试
+python -m unittest discover -s tests
+```
 
-### 当前完整目录
+脚本给的是**线索不是判决**：指标异常先看上下文，改不改由你决定。
+
+---
+
+## 项目文件说明
 
 ```text
 ai-manga-drama/
-├── SKILL.md
-├── README.md
-├── LICENSE
-├── references/                  # 9 份中文专项指南
-├── templates/                   # 9 套中文模板
-├── en/
-│   ├── SKILL.md
-│   ├── references/              # 9 份英文专项指南
-│   └── templates/               # 9 套英文模板
-├── scripts/validate.py
-└── .github/workflows/validate.yml
+├── SKILL.md                       ← 主文件（中文），含任务路由表与八阶段工作流
+├── README.md                      ← 你正在读的文件
+├── CHANGELOG.md                   ← 更新日志
+├── LICENSE                        ← MIT 许可
+│
+├── references/                    ← 16 份专项指南（按需加载）
+│   ├── craft-short-form-narrative.md   单集节奏、钩子与留存诊断
+│   ├── craft-shot-language.md          景别、轴线、动作接点、竖屏分镜
+│   ├── craft-motion-design.md          动态档位、微动、视差、运镜
+│   ├── craft-visual-style.md           画风六维度、色板、跨工具统一
+│   ├── craft-dialogue-voice-and-sound.md 台词预算、口型四档、混音字幕
+│   ├── character-consistency.md        参考库工作流与漂移诊断
+│   ├── prompt-templates.md             剧本/图像/视频/声音提示结构
+│   ├── platform-specs-and-delivery.md  交付规格、画幅转换、多平台分发
+│   ├── production-cost-and-schedule.md 单位成本、产能模型、排期闸门
+│   ├── tools-catalog.md                工具能力维度与官方入口
+│   ├── project-and-continuity.md       事实源、命名、版本、交接
+│   ├── workflow-examples.md            三条路线的端到端示例
+│   ├── automation-workflow.md          批量、重试、幂等、人工闸门
+│   ├── rights-safety-and-platforms.md  版权、肖像、声音、AI 标识
+│   ├── commercialization-and-analytics.md 受众、连载、合同、数据复盘
+│   └── quality-evaluation-and-tests.md 硬门禁、评分、行为测试
+│
+├── templates/                     ← 12 套可直接复制的模板
+│   ├── manga-project.md  episode-brief.md  character-bible.md
+│   ├── style-guide.md    shot-list.md      audio-sheet.md
+│   ├── asset-ledger.md   rights-consent-log.md  production-run-log.md
+│   ├── quality-scorecard.md  experiment-log.md  release-checklist.md
+│
+├── scripts/                       ← 4 个零依赖脚本
+│   ├── shotlist_lint.py  prompt_blocks.py  budget_estimate.py  validate.py
+├── tests/                         ← 脚本单元测试
+├── .github/workflows/validate.yml ← push/PR 自动校验
+│
+└── en/                            ← 完整英文版（16 份指南 + 12 套模板 + SKILL.md + README.md）
 ```
 
-### 维护与验证
+---
 
-仓库提供零依赖验证脚本，用于检查 UTF-8、Skill front matter、相对链接、双语文件镜像、英文目录中文残留和未完成标记：
+## 常见问题 FAQ
+
+### Q1：完全不会画画，也能做吗？
+
+能。画面由 AI 图像工具生成，你只需要输入文字描述和参考图。描述也不用自己想——Skill 会按"固定身份块 + 固定风格块 + 镜头变量"的结构写给你。
+
+### Q2：角色总是"变脸"怎么办？
+
+这是 AI 漫剧最大的技术挑战。**正解不是把描述写得更详细，而是建立参考图库并每镜回指它**：
+
+1. 先定一张干净的正脸标准图（均匀光、中性表情、短边 ≥1024）；
+2. 以它为准生成 5–8 张角度/表情/全身参考，逐张人工批准；
+3. 每镜从库里挑 2–4 张引用，并说明哪张图管脸、哪张管服装；
+4. **绝不用"上一张满意的成品"当下一张的参考**——逐代传递会让偏差滚雪球。
+
+详见 [角色一致性指南](references/character-consistency.md)。
+
+### Q3：一集做多久？更新频率怎么定？
+
+用真实产能倒推，不要先定"日更"再硬扛。仓库的预算脚本可以算单位成本，[成本、产能与排期](references/production-cost-and-schedule.md) 给了"样片 → 小批 → 量产"的三道闸门与排期缓冲建议。
+
+经验上：前三集最贵（要建锚点），之后每集边际成本明显下降。**锚点阶段不要省**——省一小时，后面每集多花两小时修漂移。
+
+### Q4：做出来能发布/赚钱吗？
+
+可以，但要过三关：
+
+- **权利关**：剧本原创或已授权；音乐、字体、声音、肖像各有许可；不能用无授权素材。
+- **标识关**：中国境内发布的 AI 生成合成内容需要按规定添加显式/隐式标识（《人工智能生成合成内容标识办法》及配套标识方法标准）；海外平台的披露规则不同，发布当日按平台复核。**不得删除服务写入的标识或元数据**。
+- **真实性关**：不冒充真人、不制作可能被误认为真实事件的欺骗性内容。
+
+商业化路径、指标与合同注意项见[商业化与分析](references/commercialization-and-analytics.md)。本项目**不承诺任何收益**。
+
+### Q5：可以用手机完成吗？
+
+A 路线的大部分环节在手机端都能做（图像/视频工具、剪辑 App），但用电脑操作效率更高，尤其是分镜表和素材管理。
+
+### Q6：能做其他语言的漫剧吗？
+
+可以。配音与字幕分开决策：常见做法是配音用目标市场母语、字幕保留原文或双语。画面里的文字要在生成阶段留白，交给后期排版、便于多语言替换。
+
+### Q7：这个 Skill 和直接问 AI "帮我做漫剧"有什么区别？
+
+直接问也能得到帮助，但容易跳过关键步骤：角色参考库、分镜连续性、动态档位选择、台词时长预算、口型策略、多平台交付规格、AI 标识。本 Skill 把这些做成流程与检查清单，并有四个脚本做机械体检。
+
+### Q8：脚本会替我做决定吗？
+
+不会。脚本只做机械检查（字段缺失、时长对不上、链接失效、镜像缺文件）。**创意、选片、风格判断和是否发布永远由你决定。**
+
+---
+
+## 维护与验证
+
+仓库自带校验脚本，检查 UTF-8、front matter、相对链接、双语镜像完整性、英文目录中文残留、未完成标记、脚本语法与"指南是否可从入口到达"：
 
 ```bash
-python -X utf8 scripts/validate.py
+python -X utf8 scripts/validate.py --warnings-as-errors
 ```
 
-GitHub Actions 会在推送和拉取请求时运行同一检查。维护 Skill 时仍应人工执行[行为测试](references/quality-evaluation-and-tests.md)，并重新打开当前官方文档核对工具和平台规则。
+GitHub Actions 在推送与拉取请求时会跑同一套校验加单元测试。维护 Skill 时仍应人工执行[行为测试](references/quality-evaluation-and-tests.md)，并在发布前重新打开官方文档核对工具与平台规则。
+
+变更记录见 [CHANGELOG.md](CHANGELOG.md)。
+
+---
+
+## 参考项目
+
+以下开源项目为本 Skill 提供了思路参考：
+
+- [UllrAI/CineGen-ShortDrama](https://github.com/UllrAI/CineGen-ShortDrama) — 开源 AI 导演系统，漫剧/动漫/短剧生成
+- [AniME (SIGGRAPH Asia 2025)](https://dl.acm.org/doi/10.1145/3757374.3771455) — B站多 Agent 动画生成论文（7 Agent 架构）
+- [BigBanana-AI-Director](https://github.com/shuyu-labs/BigBanana-AI-Director) — 工业级项目-季-集生产管线
+- [Yutarop/comic-generator](https://github.com/Yutarop/comic-generator) — 一句话 → 完整漫画（MIT 开源）
+- [Ran-Chou/moyin-creator](https://github.com/Ran-Chou/moyin-creator) — 魔因漫创，6 层身份锚定系统
+
+---
+
+## 许可
+
+MIT License — 详见 [LICENSE](LICENSE)。使用、修改、分发均可，附上原作者署名即可。
+
+本项目提供的是创作与制作的风险检查框架，**不替代**针对具体地区、合同或发布场景的法律意见。

@@ -3,6 +3,7 @@ name: Validate skill
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -10,7 +11,44 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+
     steps:
       - uses: actions/checkout@v4
-      - name: Validate repository
-        run: python3 -X utf8 scripts/validate.py
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run script unit tests
+        run: python -X utf8 -m unittest discover -s tests -v
+
+      - name: Validate repository structure and bilingual mirror
+        run: python -X utf8 scripts/validate.py --warnings-as-errors
+
+      - name: Smoke test the shot-list lint
+        run: |
+          cat > /tmp/shots.md <<'EOF'
+          | Shot | Timecode | Composition | Action | Entry | Exit | Status |
+          |------|----------|-------------|--------|-------|------|--------|
+          | E01-S001 | 00:00/4 | wide | walks in | none | hand raised | approved |
+          | E01-S002 | 00:04/5 | medium close | reaches out | hand raised | hand lowered | approved |
+          EOF
+          python -X utf8 scripts/shotlist_lint.py /tmp/shots.md --target-seconds 9
+
+      - name: Smoke test the prompt assembler
+        run: |
+          python -X utf8 scripts/prompt_blocks.py --lang en \
+            --style-block "fine line, cel shading, muted warm palette" \
+            --identity-text "CHAR-01 / LOOK-01: chin-length black hair, off-white knit" \
+            --action "reaches for the mailbox" --shot-size "medium close" \
+            --camera "slow push in" --negative "extra hands" --negative "text, watermark"
+
+      - name: Smoke test the budget estimator
+        run: |
+          python -X utf8 scripts/budget_estimate.py --shots 40 --seconds 5 \
+            --attempts 2.5 --unit-cost 0.6 --target-seconds 180
